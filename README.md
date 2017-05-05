@@ -1,4 +1,4 @@
-Here are install instructions to run [ha-bridge](https://github.com/bwssytems/ha-bridge) on an emonPi
+Here are install instructions to run [ha-bridge](https://github.com/bwssytems/ha-bridge) on an emonPi (Raspberry Pi running [emonSD](https://github.com/openenergymonitor/emonpi/wiki/emonSD-pre-built-SD-card-Download-&-Change-Log) based on Raspbian Jessie).
 
 Home automation (HA) bridge emulates a Philips Hue light system and can control other systems such as a Vera, Harmony Hub, Nest, MiLight bulbs or any other system that has an http/https/tcp/udp interface.
 
@@ -12,6 +12,7 @@ The install instructions below are mostly coped from [ha-bridge repo readme](htt
 
 # Install ha-bridge on emonPi
 
+*Tested on [emonSD-07Nov16](https://github.com/openenergymonitor/emonpi/wiki/emonSD-pre-built-SD-card-Download-&-Change-Log#emonsd-07nov16)*
 
 The emonPi runs a read-only file-system. The only folder which is mounted as RW is `/home/pi/data/`, we need to move ha-bridge config to this folder to allow ha-bridge to be able to save it's db and config when emonPi is in RO mode:
 
