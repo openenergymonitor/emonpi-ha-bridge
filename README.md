@@ -47,7 +47,7 @@ Now return to SSH terminal and stop java process (CTRL + C) then open port 8081
 
 Now start ha-bridge java process and browser to port 8081
 
-[http://emonpi:8081](http://emonpiL8081)
+[http://emonpi:8081](http://emonpi:8081)
 
 You should now be able to see ha-bridge web page..great! Now stop ha-brdige again (CTRL+C)
 
