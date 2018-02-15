@@ -27,13 +27,20 @@ Replace the above URL with latest version
 
 ## Run for the first time
 
-Since ha-bridge by default runs on port 80 we need to stop apache (serving emoncms) temperarrly to allow us to run ha-bridge for the first time:
+Since ha-bridge by default runs on port 80 we need to stop apache (serving emoncms) temporarily to allow us to run ha-bridge for the first time:
 
 `sudo service apache2 stop`
 
 Test run the ha-bridge
 
 `sudo java -jar ha-bridge-4.5.0.jar`
+
+Note you can also select which port to start the ha-bridge by using the command line option:
+### -Dserver.port=`<port number>`
+eg:
+```
+java -jar -Dserver.port=8081 ha-bridge-W.X.Y.jar
+```
 
 ## Make ha-bridge run alongside Apache
 
@@ -49,7 +56,15 @@ Now start ha-bridge java process and browser to port 8081
 
 [http://emonpi:8081](http://emonpi:8081)
 
-You should now be able to see ha-bridge web page..great! Now stop ha-brdige again (CTRL+C)
+You should now be able to see ha-bridge web page..great! Now stop ha-bridge again (CTRL+C)
+
+
+
+
+
+# Enable the required Apache modules:
+
+`a2enmod proxy proxy_http headers`
 
 We now need to make ha-bridge run nicely alongside Apache (which is already using port 80). Edit apache config to create a reverse proxy to allow ha-bridge to run alongside apache on port 80. All `/api` calls will be passed to ha-config
 
@@ -58,7 +73,7 @@ We now need to make ha-bridge run nicely alongside Apache (which is already usin
 At the following lines below `<VirtualHost *:80>`
 
 ```
-ProxyPass         /api  http://localhost:8080/api nocanon
+ProxyPass         /api  http://localhost:8081/api nocanon
         ProxyPassReverse  /api  http://localhost:8081/api
         ProxyRequests     Off
         AllowEncodedSlashes NoDecode
@@ -73,7 +88,7 @@ ProxyPass         /api  http://localhost:8080/api nocanon
 
 Save and exit nano then start Apache:
 
-`sudo service apacher start`
+`sudo service apache2 start`
 
 Now the ha-bridge API should be able to run alongside Apache on port 80. Google Home requires ha-bridge to be on port 80.
 
